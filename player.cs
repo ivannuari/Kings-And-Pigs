@@ -12,10 +12,9 @@ public class player : MonoBehaviour
     public int maxHealth = 3;
     public int currHealth;
     public int attackDamage = 2;
-
+    //parameter for groundcheck
     private float moveX;
     private bool isGrounded = true;
-
     public Transform groundcheck;
     public float checkRadius;
     public LayerMask WhatisGround;
@@ -70,7 +69,8 @@ public class player : MonoBehaviour
 
         //cooldown for attack 
         cooldown -= Time.deltaTime;
-
+        
+        //motion for walk
         anim.SetFloat("jalan", rb.velocity.magnitude);
 
         if(Input.GetButtonDown("Jump"))
@@ -96,7 +96,10 @@ public class player : MonoBehaviour
 
     void FixedUpdate()
     {
+        //movement rigidbody2d
         rb.velocity = new Vector2(moveX * speed , rb.velocity.y);
+        
+        //check the ground with boolean
         isGrounded = Physics2D.OverlapCircle(groundcheck.position,checkRadius,WhatisGround);
     }
 
